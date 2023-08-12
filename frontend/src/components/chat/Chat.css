@@ -1,0 +1,17 @@
+.message-right {
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background-color: #e2f0ff;
+  float: right;
+  clear: both;
+}
+
+.message-left {
+  margin-bottom: 10px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background-color: #e2f0ff;
+  float: left;
+  clear: both;
+}
