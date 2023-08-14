@@ -10,7 +10,7 @@ const io = new Server(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
-});
+}); // cors for crss platform
 
 const cors = require("cors");
 const userRouter = require("./routes/userRoute");
@@ -35,21 +35,29 @@ app.use(userRouter);
 
 io.on("connection", (socket) => {
   socket.on("newUser", (username) => {
-    socket.broadcast.emit("update", username + Join);
+    console.log(`${username} join`);
+    io.emit("update", `${username} join`); // Brodcast to all user
   });
+
+  socket.on("mychat", async (message) => {
+    // const mychat = new ChatModel({ message }); // Save message to database
+    // await mychat.save();
+    socket.broadcast.emit("mychat", message); // except sender brodcast to all
+  });
+
+  //incomming fro  client
+  socket.on("recive", (message) => {
+    console.log(message);
+  });
+
+  // socket.on("otherschat");
+
   socket.on("exitUser", (username) => {
-    socket.broadcast("update", username + "Exit ");
-  });
-
-  socket.on("chat", async (message) => {
-    const chat = new ChatModel({ message });
-    await chat.save();
-
-    console.log(chat); // Move this line here
-    io.emit("chat", message);
+    io.emit("update", `${username} Exit`);
+    console.log(`${username} Exit`);
   });
 
   socket.on("disconnect", () => {
-    console.log("A user disconnected");
+    console.log("user disconnected");
   });
 });
