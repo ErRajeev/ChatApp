@@ -2,12 +2,13 @@ import React from 'react'
 import "./Chat.css"
 
 function Chat(props) {
-    const { chat = [], actuser } = props
-    console.log(actuser);
+    const { chat = [], mychat = [], actuser } = props
+    console.log(mychat);
+    console.log(chat);
     return (
         <>
             <div className="message-right">
-                {chat.map((msg, index) => (
+                {mychat?.map((msg, index) => (
                     <div key={index}>
                         <h6>{actuser}</h6>
                         <p>{msg}</p>
@@ -15,7 +16,7 @@ function Chat(props) {
                 ))}
             </div>
             <div className="message-left">
-                {chat.map((msg, index) => (
+                {chat?.map((msg, index) => (
                     <div key={index}>
                         <h6>{actuser}</h6>
                         <p>{msg}</p>

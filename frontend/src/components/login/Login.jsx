@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useUserContext } from "../context/UserContext"
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:5000");
 
-const SignUp = () => {
+
+const Login = () => {
     const [user, setUser] = useState("");
     const [password, setPassword] = useState("")
     const [error, setError] = useState("");
@@ -38,6 +41,7 @@ const SignUp = () => {
             setError(result.error)
         } else {
             setActuser(user)
+            socket.emit('newUser', user);
             setUser("");
             setPassword("");
             setSuccess(`Welcome, ${user}!`);
@@ -70,4 +74,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;
