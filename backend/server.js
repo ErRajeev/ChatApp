@@ -18,10 +18,13 @@ app.use(express.json());
 app.use(cors());
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/chatapp", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://ErRajeev:Rajeevoo7@rajeev.wopoaet.mongodb.net/Live-Chat?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => {
     server.listen(5000, () => {
       console.log("Server is running...");
